@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.openmrs.maven.parents</groupId>
+        <artifactId>maven-parent-openmrs-module</artifactId>
+        <version>1.1.1</version>
+    </parent>
+
+	<groupId>org.openmrs.module</groupId>
+	<artifactId>pacsquery</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>Pacs Query</name>
+	<description>This module allows DICOM queries through a REST (GET) request. It can be used by a front-end interface to retreive PACS images information for a specific patient or date.</description>
+
+	<url>https://github.com/Annoor-Hospital/pacsquery/</url>
+
+	<scm>
+		<connection>scm:git:git@github.com:Annoor-Hospital/pacsquery.git</connection>
+		<developerConnection>scm:git:git@github.com:Annoor-Hospital/pacsquery.git</developerConnection>
+		<url>https://github.com/Annoor-Hospital/pacsquery/</url>
+	</scm>
+
+	<modules>
+		<module>api</module>
+		<module>omod</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>scijava.public</id>
+			<url>https://maven.scijava.org/content/repositories/public</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>https://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+    <properties>
+        <openmrsPlatformVersion>2.1.1</openmrsPlatformVersion>
+    </properties>
+</project>

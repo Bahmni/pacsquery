@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+	
+	<!-- Base Module Properties -->
+	<id>pacsquery</id>
+	<name>Pacs Query</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<package>org.openmrs.module.pacsquery</package>
+	<author>openmrs</author>
+	<description>
+
+	</description>
+
+	<activator>org.openmrs.module.pacsquery.PacsQueryActivator</activator>
+	
+	<!-- <updateURL>https://modules.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL> -->
+	<!-- /Base Module Properties -->
+	
+	<require_version>2.0.0</require_version>
+	
+	<require_modules>
+		<!-- How do I require this module? It just says requires webservices-rest 2.29
+		<require_module version="2.29">org.openmrs.module.webservices-rest</require_module>
+		-->
+	</require_modules>
+
+	<aware_of_modules>
+		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
+	</aware_of_modules>
+	
+	
+	<!-- AOP
+	<advice>
+		<point>org.openmrs.api.FormService</point>
+		<class>@MODULE_PACKAGE@.advice.DuplicateFormAdvisor</class>
+	</advice>
+	 /AOP -->
+	
+	
+	<!-- Required Privileges 
+	<privilege>
+		<name>Form Entry</name>
+		<description>Allows user to access Form Entry pages/functions</description>
+	</privilege>
+	 /Required Privileges -->
+
+	<globalProperty>
+		<property>pacsquery.pacsConfig</property>
+		<defaultValue>DCM4CHEE@localhost:11112</defaultValue>
+		<description>
+			AE Title, Host/IP and port of PACS system for study retrieval. Default is DCM4CHEE@localhost:11112.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>pacsquery.retrieveTags</property>
+		<defaultValue>00080020,00080030,00080060,0020000D,00402016,00080050,00321060</defaultValue>
+		<description>
+			Comma-seperated list of DICOM tags of study properties for retrieval, in addition to 00100020 (patient ID). Default is 00080020,00080030,00080060,0020000D,00402016,00080050,00321060. These correspond to: study date, study time, modality, study uid, order number, accession number, requested procedure description.
+		</description>
+	</globalProperty>
+	
+	<!-- Servlets -->
+	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> 
+	<servlet>
+		<servlet-name>formDownload</servlet-name>
+		<servlet-class>@MODULE_PACKAGE@.web.FormDownloadServlet</servlet-class>
+	</servlet>
+	-->
+	<!-- /Servlets -->
+	
+	
+	<!-- Internationalization -->
+	<!-- All message codes should start with @MODULE_ID@.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+	
+</module>
+
