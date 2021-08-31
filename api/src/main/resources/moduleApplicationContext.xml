@@ -23,36 +23,21 @@
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <context:component-scan base-package="org.openmrs.module.pacsquery" />
-
-    <!-- Wraps PacsQueryService methods in DB transactions and OpenMRS interceptors,
-    which set audit info like dateCreated, changedBy, etc.-->
-    <bean id="pacsquery.PacsQueryService"
-            class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+    <bean id="pacsService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
-            <ref bean="transactionManager" />
+            <ref bean="transactionManager"/>
         </property>
         <property name="target">
-            <bean class="org.openmrs.module.pacsquery.api.impl.PacsQueryServiceImpl">
-                <property name="dao" ref="pacsquery.PacsQueryDao" />
+            <bean class="org.bahmni.module.pacsquery.service.impl.Dcm4cheServiceImpl">
+                <constructor-arg ref="adminService"/>
             </bean>
         </property>
         <property name="preInterceptors">
-            <ref bean="serviceInterceptors" />
+            <ref bean="serviceInterceptors"/>
         </property>
         <property name="transactionAttributeSource">
-            <ref bean="transactionAttributeSource" />
+            <ref bean="transactionAttributeSource"/>
         </property>
     </bean>
 
-    <!-- Adds PacsQueryService to OpenMRS context so it can be accessed
-    calling Context.getService(PacsQueryService.class) -->
-    <bean parent="serviceContext">
-        <property name="moduleService">
-            <list>
-                <value>org.openmrs.module.pacsquery.api.PacsQueryService</value>
-                <ref bean="pacsquery.PacsQueryService" />
-            </list>
-        </property>
-    </bean>
 </beans>

@@ -8,9 +8,9 @@
         <version>1.1.1</version>
     </parent>
 
-	<groupId>org.openmrs.module</groupId>
+	<groupId>org.bahmni.module</groupId>
 	<artifactId>pacsquery</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Pacs Query</name>
 	<description>This module allows DICOM queries through a REST (GET) request. It can be used by a front-end interface to retreive PACS images information for a specific patient or date.</description>
@@ -56,7 +56,32 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-sonatype</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus-sonatype</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
+
     <properties>
         <openmrsPlatformVersion>2.1.1</openmrsPlatformVersion>
+		<openmrsWebServicesVersion>2.17</openmrsWebServicesVersion>
     </properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
