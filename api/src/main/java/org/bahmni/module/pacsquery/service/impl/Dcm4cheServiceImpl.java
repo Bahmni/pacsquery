@@ -22,7 +22,6 @@ import org.openmrs.api.ValidationException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -44,6 +43,9 @@ public class Dcm4cheServiceImpl implements PacsService {
 	private HashMap<String, Object> loadConfig() {
 		String pacsConfig = administrationService.getGlobalProperty("pacsquery.pacsConfig");
 		HashMap<String, Object> configParams = new HashMap<>();
+		if (pacsConfig == null || "".equals(pacsConfig)) {
+			return configParams;
+		}
 
 		// DCM4CHEE@localhost:11112
 		String[] parts = pacsConfig.split("@");
@@ -65,8 +67,11 @@ public class Dcm4cheServiceImpl implements PacsService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> findStudies(String patientId, String date) {
+	public List<Object> findStudies(String patientId, String date) {
 		HashMap<String, Object> config = loadConfig();
+		if (config.isEmpty()) {
+			throw new UnsupportedOperationException("Pacs Server configuration not setup");
+		}
 		verifyParameters(patientId, date);
 		Device device = new Device(DEVICE_NAME);
 		Connection remoteConnection = new Connection("pacs", (String) config.get("host"), (Integer) config.get("port"));

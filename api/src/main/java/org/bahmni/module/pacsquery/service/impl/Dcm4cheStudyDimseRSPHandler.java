@@ -8,9 +8,7 @@ import org.dcm4che3.net.Status;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -20,7 +18,7 @@ public class Dcm4cheStudyDimseRSPHandler extends DimseRSPHandler {
 	
 	private int numMatches = 0;
 	
-	private List<Map<String, Object>> studies = new ArrayList();
+	private List<Object> studies = new ArrayList();
 	
 	public Dcm4cheStudyDimseRSPHandler(int msgId) {
 		super(msgId);
@@ -32,29 +30,19 @@ public class Dcm4cheStudyDimseRSPHandler extends DimseRSPHandler {
 		int status = cmd.getInt(Tag.Status, -1);
 		if (Status.isPending(status)) {
 			try {
-				HashMap<String, Object> record = new HashMap<String, Object>();
 				Function<Integer, Optional<String>> attrCheck = tag -> {
 					if (!data.contains(tag)) {
 						return Optional.empty();
 					}
 					return Optional.ofNullable(data.getString(tag));
 				};
-				attrCheck.apply(Tag.PatientID).ifPresent(value -> record.put("patientId", value));
-				attrCheck.apply(Tag.PatientName).ifPresent(value -> record.put("patientName", value));
-				attrCheck.apply(Tag.CreationDate).ifPresent(value -> record.put("creationDate", value));
-				attrCheck.apply(Tag.StudyDate).ifPresent(value -> record.put("studyDate", value));
-				attrCheck.apply(Tag.StudyTime).ifPresent(value -> record.put("studyTime", value));
-				attrCheck.apply(Tag.StudyInstanceUID).ifPresent(value -> record.put("studyInstanceUID", value));
-				attrCheck.apply(Tag.StudyID).ifPresent(value -> record.put("studyID", value));
-				attrCheck.apply(Tag.SeriesDate).ifPresent(value -> record.put("seriesDate", value));
-				attrCheck.apply(Tag.SeriesTime).ifPresent(value -> record.put("seriesTime", value));
-				attrCheck.apply(Tag.SeriesDescription).ifPresent(value -> record.put("seriesDescription", value));
-				attrCheck.apply(Tag.SeriesInstanceUID).ifPresent(value -> record.put("seriesInstanceUID", value));
-				attrCheck.apply(Tag.AccessionNumber).ifPresent(value -> record.put("accessionNumber", value));
-				attrCheck.apply(Tag.RequestedProcedureDescription).ifPresent(value -> record.put("requestedProcedureDescription", value));
-				attrCheck.apply(Tag.RequestedProcedureComments).ifPresent(value -> record.put("requestedProcedureComments", value));
-				attrCheck.apply(Tag.ScheduledProcedureStepDescription).ifPresent(value -> record.put("scheduledProcedureStepDescription", value));
-				studies.add(record);
+				SimpleImagingStudy dicomStudy = new SimpleImagingStudy();
+				attrCheck.apply(Tag.PatientID).ifPresent(value -> dicomStudy.setPatientReference(value));
+				attrCheck.apply(Tag.StudyInstanceUID).ifPresent(value -> dicomStudy.setStudyUID(value));
+				attrCheck.apply(Tag.AccessionNumber).ifPresent(value -> dicomStudy.setAccessionNumber(value));
+				attrCheck.apply(Tag.StudyDate).ifPresent(value -> dicomStudy.setStarted(value));
+				attrCheck.apply(Tag.Status).ifPresent(value -> dicomStudy.setStatus(value));
+				studies.add(dicomStudy);
 			} catch (Exception e) {
 				System.out.println("Failed to write JSON : " + e.getMessage());
 			}
@@ -70,7 +58,7 @@ public class Dcm4cheStudyDimseRSPHandler extends DimseRSPHandler {
 		}
 	}
 	
-	public List<Map<String, Object>> getStudies() {
+	public List<Object> getStudies() {
 		return this.studies;
 	}
 }

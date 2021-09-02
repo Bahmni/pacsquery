@@ -45,9 +45,9 @@
 
 	<globalProperty>
 		<property>pacsquery.pacsConfig</property>
-		<defaultValue>DCM4CHEE@localhost:11112</defaultValue>
+		<defaultValue></defaultValue>
 		<description>
-			AE Title, Host/IP and port of PACS system for study retrieval. Default is DCM4CHEE@localhost:11112.
+			AE Title, Host/IP and port of PACS system for study retrieval. For example DCM4CHEE@localhost:11112
 		</description>
 	</globalProperty>
 	<globalProperty>

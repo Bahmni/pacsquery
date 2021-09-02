@@ -21,6 +21,8 @@ public class DicomStudiesQueryController {
 	
 	private static final String ERROR_OCCURRED_WHILE_QUERYING_PACS_SERVER = "Error occurred while trying to query PACS server";
 	
+	private static final String PACS_CONFIGURATION_UNDEFINED = "Undefined Pacs Server configuration";
+	
 	private final Log log = LogFactory.getLog(getClass());
 	
 	private static final String INSUFFICIENT_PRIVILEGE = "Insufficient privilege";
@@ -35,6 +37,9 @@ public class DicomStudiesQueryController {
 		try {
 			Object studies = pacsService.findStudies(patientId, date);
 			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).body(studies);
+		} catch (UnsupportedOperationException uoe) {
+			log.error(ERROR_OCCURRED_WHILE_QUERYING_PACS_SERVER, uoe);
+			return new ResponseEntity<>(WebUtils.wrapErrorResponse(null, PACS_CONFIGURATION_UNDEFINED), HttpStatus.NOT_IMPLEMENTED);
 		} catch (APIAuthenticationException aae) {
 			log.error(ERROR_OCCURRED_WHILE_QUERYING_PACS_SERVER, aae);
 			return new ResponseEntity<>(WebUtils.wrapErrorResponse(null, INSUFFICIENT_PRIVILEGE), HttpStatus.FORBIDDEN);
