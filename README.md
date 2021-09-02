@@ -5,30 +5,52 @@ Description
 -----------
 This module provides a URL-based query to a PACS system, retrieving studies according to patient ID and returning a list of matched studies with a collection of queried fields.
 
-The connection to the PACS system should be configured via the pacsquery.pacsConfig OpenMRS globalProperty. Studies can be retrieved by going to `http://HOSTIP/openmrs/module/pacsquery/query.form?patientid=204586`. Fields can be configured using the pacsquery.retrieveTags globalProperty.
+The connection to the PACS system should be configured via the pacsquery.pacsConfig OpenMRS globalProperty. Studies can be retrieved by going to `http://HOSTIP/openmrs/ws/rest/v1/pacs/studies?patientId=GAN203006`. Fields can be configured using the pacsquery.retrieveTags globalProperty.
 
 The response JSON is built using the JSONWriter component of dcm4che. What is returned is a list of objects, each object representing a study. Each study is itself a collect of key value pairs, where keys are 8-character strings of DICOM tags. Corresponding values are an object containing "vr" and "Value".
 
 Example:
 
-	[  
-	   {  
-	      "00080005":{  
-	         "vr":"CS",
-	         "Value":[  
-	            "ISO_IR 100"
-	         ]
-	      },
-	      "00080020":{  
-	         "vr":"DA",
-	         "Value":[  
-	            "20170614"
-	         ]
-	      },
-	      ...
-	   }
-	   ...
-	]
+	[
+        {
+            "resourceType": "ImagingStudy",
+            "id": "1.3.6.1.4.1.5962.99.1.2594.1780.1630387530609.1.2.0",
+            "identifier": [
+                {
+                    "system": "urn:dicom:uid",
+                    "value": "urn:oid:1.3.6.1.4.1.5962.99.1.2594.1780.1630387530609.1.2.0"
+                },
+                {
+                    "system": "urn:bahmni:accession",
+                    "value": "urn:oid:ORD-308"
+                }
+            ],
+            "subject": {
+                "reference": "Patient/GAN203006"
+            },
+            "started": "20210831105530",
+            "status": "available"
+        },
+        {
+            "resourceType": "ImagingStudy",
+            "id": "1.3.6.1.4.1.5962.99.1.2595.1980.1630388022378.1.2.0",
+            "identifier": [
+                {
+                    "system": "urn:dicom:uid",
+                    "value": "urn:oid:1.3.6.1.4.1.5962.99.1.2595.1980.1630388022378.1.2.0"
+                },
+                {
+                    "system": "urn:bahmni:accession",
+                    "value": "urn:oid:ORD-307"
+                }
+            ],
+            "subject": {
+                "reference": "Patient/GAN203006"
+            },
+            "started": "20210831110342",
+            "status": "available"
+        }
+    ]
 
 Building from Source
 --------------------
