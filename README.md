@@ -7,7 +7,7 @@ This module provides a URL-based query to a PACS system, retrieving studies acco
 
 The connection to the PACS system should be configured via the pacsquery.pacsConfig OpenMRS globalProperty. Studies can be retrieved by going to `http://HOSTIP/openmrs/ws/rest/v1/pacs/studies?patientId=GAN203006`. Fields can be configured using the pacsquery.retrieveTags globalProperty.
 
-The response JSON is built using the JSONWriter component of dcm4che. What is returned is a list of objects, each object representing a study. Each study is itself a collect of key value pairs, where keys are 8-character strings of DICOM tags. Corresponding values are an object containing "vr" and "Value".
+The response JSON is an array of FHIR ImagingStudy of minimal representation. 
 
 Example:
 
@@ -59,7 +59,7 @@ This module was created using the OpenMRS SDK.
 Full build instructions
 -----------------------
 
-You will need to have Java 1.6+ and Maven 2.x+ installed.  Use the command 'mvn package' to 
+You will need to have Java 1.8+ and Maven 2.x+ installed.  Use the command 'mvn package' to 
 compile and package the module.  The .omod file will be in the omod/target folder.
 
 Alternatively you can add the snippet provided in the [Creating Modules](https://wiki.openmrs.org/x/cAEr) page to your 
