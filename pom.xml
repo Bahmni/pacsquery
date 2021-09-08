@@ -18,9 +18,9 @@
 	<url>https://github.com/Annoor-Hospital/pacsquery/</url>
 
 	<scm>
-		<connection>scm:git:git@github.com:Annoor-Hospital/pacsquery.git</connection>
-		<developerConnection>scm:git:git@github.com:Annoor-Hospital/pacsquery.git</developerConnection>
-		<url>https://github.com/Annoor-Hospital/pacsquery/</url>
+		<connection>scm:git:git@github.com:Bahmni/pacsquery.git</connection>
+		<developerConnection>scm:git:https://github.com/Bahmni/pacsquery.git</developerConnection>
+		<url>https://github.com/Bahmni/pacsquery</url>
 	</scm>
 
 	<modules>
