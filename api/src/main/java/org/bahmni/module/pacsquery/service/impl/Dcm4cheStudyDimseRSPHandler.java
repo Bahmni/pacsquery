@@ -1,5 +1,7 @@
 package org.bahmni.module.pacsquery.service.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dcm4che3.data.Attributes;
 import org.dcm4che3.data.Tag;
 import org.dcm4che3.net.Association;
@@ -19,6 +21,8 @@ public class Dcm4cheStudyDimseRSPHandler extends DimseRSPHandler {
 	private int numMatches = 0;
 	
 	private List<Object> studies = new ArrayList();
+	
+	private final Log log = LogFactory.getLog(getClass());
 	
 	public Dcm4cheStudyDimseRSPHandler(int msgId) {
 		super(msgId);
@@ -44,7 +48,7 @@ public class Dcm4cheStudyDimseRSPHandler extends DimseRSPHandler {
 				attrCheck.apply(Tag.Status).ifPresent(value -> dicomStudy.setStatus(value));
 				studies.add(dicomStudy);
 			} catch (Exception e) {
-				System.out.println("Failed to write JSON : " + e.getMessage());
+				log.error("Failed to read response", e);
 			}
 			++numMatches;
 			if (cancelAfter != 0 && numMatches >= cancelAfter) {
@@ -52,7 +56,7 @@ public class Dcm4cheStudyDimseRSPHandler extends DimseRSPHandler {
 					cancel(as);
 					cancelAfter = 0;
 				} catch (IOException e) {
-					e.printStackTrace();
+					log.error("Failed to cancel association", e);
 				}
 			}
 		}

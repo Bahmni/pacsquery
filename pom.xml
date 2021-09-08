@@ -10,7 +10,7 @@
 
 	<groupId>org.bahmni.module</groupId>
 	<artifactId>pacsquery</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.1.0</version>
 	<packaging>pom</packaging>
 	<name>Pacs Query</name>
 	<description>This module allows DICOM queries through a REST (GET) request. It can be used by a front-end interface to retreive PACS images information for a specific patient or date.</description>

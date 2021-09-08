@@ -21,11 +21,11 @@ public class DicomStudiesQueryController {
 	
 	private static final String ERROR_OCCURRED_WHILE_QUERYING_PACS_SERVER = "Error occurred while trying to query PACS server";
 	
-	private static final String PACS_CONFIGURATION_UNDEFINED = "Undefined Pacs Server configuration";
-	
-	private final Log log = LogFactory.getLog(getClass());
+	private static final String PACS_CONFIGURATION_UNDEFINED = "PACS Server configuration is not defined";
 	
 	private static final String INSUFFICIENT_PRIVILEGE = "Insufficient privilege";
+	
+	private final Log log = LogFactory.getLog(getClass());
 	
 	@Autowired
 	private PacsService pacsService;
