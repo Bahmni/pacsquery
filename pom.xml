@@ -68,7 +68,7 @@
 	</distributionManagement>
 
     <properties>
-        <openmrsPlatformVersion>2.4.2</openmrsPlatformVersion>
+        <openmrsPlatformVersion>2.5.0</openmrsPlatformVersion>
 		<openmrsWebServicesVersion>2.29.0</openmrsWebServicesVersion>
     </properties>
 
