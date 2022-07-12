@@ -1,7 +1,7 @@
 name: Build and Publish package
 on:
   push:
-    branches: [ OMRS-2.4.2 ]
+    branches: [ main ]
 
 jobs:
   build-publish-package:
