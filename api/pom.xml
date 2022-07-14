@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>org.dcm4che</groupId>
 			<artifactId>dcm4che-net</artifactId>
-			<version>5.23.3</version>
+			<version>${dcm4cheVersion}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.dcm4che</groupId>
 			<artifactId>dcm4che-core</artifactId>
-			<version>5.23.3</version>
+			<version>${dcm4cheVersion}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>org.dcm4che</groupId>
 			<artifactId>dcm4che-json</artifactId>
-			<version>5.23.3</version>
+			<version>${dcm4cheVersion}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
