@@ -5,12 +5,10 @@
 	<!-- Base Module Properties -->
 	<id>pacsquery</id>
 	<name>Pacs Query</name>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>${project.parent.version}</version>
 	<package>org.bahmni.module.pacsquery</package>
 	<author>bahmni</author>
-	<description>
-
-	</description>
+	<description>API to retrieve DICOM Studies for a patient from Dcm4Chee</description>
 
 	<activator>org.bahmni.module.pacsquery.PacsQueryActivator</activator>
 	
