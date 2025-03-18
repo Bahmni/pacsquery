@@ -56,16 +56,6 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus-sonatype</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>nexus-sonatype</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
-	</distributionManagement>
 
     <properties>
         <openmrsPlatformVersion>2.4.2</openmrsPlatformVersion>
@@ -82,6 +72,15 @@
 				<configuration>
 					<source>8</source>
 					<target>8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.7.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>nexus-sonatype</publishingServerId>
 				</configuration>
 			</plugin>
 		</plugins>
